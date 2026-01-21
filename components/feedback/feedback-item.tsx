@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { MoreVertical, Trash2, Sparkles, Tag, Bug, Lightbulb, HelpCircle, Star } from "lucide-react";
+import { MoreVertical, Trash2, Tag, Bug, Lightbulb, HelpCircle, Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -37,6 +37,7 @@ interface FeedbackItemProps {
     sentimentScore: number | null;
     labels: string[];
     email: string | null;
+    userAgent: string;
     createdAt: Date;
   };
 }
@@ -63,7 +64,6 @@ export function FeedbackItem({ feedback }: FeedbackItemProps) {
   const [expanded, setExpanded] = React.useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = React.useState(false);
   const [isDeleting, setIsDeleting] = React.useState(false);
-  // const [isAnalyzing, setIsAnalyzing] = React.useState(false); // Removed as automatic
   const [editingLabels, setEditingLabels] = React.useState(false);
   const [labelInput, setLabelInput] = React.useState("");
   const [localLabels, setLocalLabels] = React.useState(feedback.labels);
@@ -137,7 +137,7 @@ export function FeedbackItem({ feedback }: FeedbackItemProps) {
 
   return (
     <>
-      <Card 
+      <Card
         className={cn(
           "transition-all duration-200 cursor-pointer",
           expanded ? "ring-1 ring-primary/20" : "hover:shadow-sm hover:border-primary/10"
@@ -158,7 +158,7 @@ export function FeedbackItem({ feedback }: FeedbackItemProps) {
                   {formatDate(feedback.createdAt)}
                 </span>
               </div>
-              
+
               <p className={cn(
                 "text-sm text-foreground",
                 !expanded && "line-clamp-2"
@@ -173,7 +173,13 @@ export function FeedbackItem({ feedback }: FeedbackItemProps) {
                       From: <span className="text-foreground">{feedback.email}</span>
                     </p>
                   )}
+                  {feedback.userAgent && (
+                    <p className="text-xs text-muted-foreground">
+                      User Agent: <span className="text-foreground">{feedback.userAgent}</span>
+                    </p>
+                  )
 
+                  }
                   <div className="flex items-center gap-2 flex-wrap">
                     {localLabels.map((label) => (
                       <Badge
@@ -222,7 +228,7 @@ export function FeedbackItem({ feedback }: FeedbackItemProps) {
                   <MoreVertical className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
+              <DropdownMenuContent align="end">
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                   onClick={() => setShowDeleteDialog(true)}

@@ -29,8 +29,13 @@ const navItems = [
   },
 ]
 
+interface User {
+  name: string
+  email: string
+  image?: string | null
+}
 
-export function AppSidebar({ user, ...props }: React.ComponentProps<typeof Sidebar> & { user: any }) { // Using any for rough type match, ideally typed
+export function AppSidebar({ user, ...props }: React.ComponentProps<typeof Sidebar> & { user: User }) {
   const pathname = usePathname()
 
   return (

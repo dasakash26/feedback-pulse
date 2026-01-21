@@ -1,12 +1,8 @@
 "use client"
 
 import {
-  BadgeCheck,
-  Bell,
   ChevronsUpDown,
-  CreditCard,
   LogOut,
-  Sparkles,
 } from "lucide-react"
 
 import {
@@ -17,7 +13,6 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -38,7 +33,7 @@ export function NavUser({
   user: {
     name: string
     email: string
-    image?: string
+    image?: string | null
   }
 }) {
   const { isMobile } = useSidebar()
@@ -64,7 +59,7 @@ export function NavUser({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8">
-                <AvatarImage src={user?.image} alt={user?.name} />
+                <AvatarImage src={user?.image || ""} alt={user?.name} />
                 <AvatarFallback>
                   {user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2)}
                 </AvatarFallback>
@@ -85,9 +80,10 @@ export function NavUser({
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src={user.image} alt={user.name} />
+                  <AvatarImage src={user.image || ""} alt={user.name} />
                   <AvatarFallback>
-                  {user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2)}
+                    DropdownMenuGroup,
+                    {user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2)}
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
+import Sentiment from "sentiment";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -14,7 +15,7 @@ export async function OPTIONS() {
 export async function POST(request: NextRequest) {
   try {
     const apiKey = request.headers.get("X-API-Key");
-    
+
     if (!apiKey) {
       return NextResponse.json(
         { error: "API key is required" },
@@ -53,18 +54,17 @@ export async function POST(request: NextRequest) {
     const validTypes = ["BUG", "FEATURE", "OTHER"];
     const type = validTypes.includes(feedbackType) ? feedbackType : "OTHER";
 
-    const Sentiment = require("sentiment");
     const sentimentAnalyzer = new Sentiment();
     const result = sentimentAnalyzer.analyze(content.trim());
-    
+
     // Convert score to our format
     // result.score is typically between -5 and 5
     // result.comparative is score / number of words
-    
+
     let sentiment = "neutral";
     if (result.score > 1) sentiment = "positive";
     if (result.score < -1) sentiment = "negative";
-    
+
     // Normalize confidence score to 0-1 range for compatibility
     // Using comparative score absolute value, capped at 1
     const sentimentScore = Math.min(Math.abs(result.comparative), 1);

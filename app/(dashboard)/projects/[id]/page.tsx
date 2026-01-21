@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { AppSidebar } from "@/components/dashboard/app-sidebar";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 import {
@@ -13,12 +12,9 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import {
-  SidebarInset,
-  SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getProject } from "@/app/actions/projects";
 import { getFeedbackByProject } from "@/app/actions/feedback";
@@ -29,8 +25,6 @@ import { CopyApiKeyButton, EmbedCodeButton } from "@/components/projects/copy-bu
 interface ProjectPageProps {
   params: Promise<{ id: string }>;
 }
-
-
 
 
 
@@ -169,9 +163,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <div className="p-6">
             <h2 className="text-lg font-semibold mb-4">Feedback</h2>
             <Suspense fallback={<ProjectDetailSkeleton />}>
-              <FeedbackList 
-                projectId={id} 
-                initialFeedbacks={JSON.parse(JSON.stringify(feedbacks))} 
+              <FeedbackList
+                projectId={id}
+                initialFeedbacks={JSON.parse(JSON.stringify(feedbacks))}
                 initialTotal={total}
               />
             </Suspense>

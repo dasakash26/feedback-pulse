@@ -34,7 +34,6 @@ export async function getFeedbackByProject({
     throw new Error("Unauthorized");
   }
 
-  // Verify project ownership
   const project = await prisma.project.findFirst({
     where: { id: projectId, userId: session.user.id },
   });
@@ -101,7 +100,6 @@ export async function updateFeedbackLabels(feedbackId: string, labels: string[])
     throw new Error("Unauthorized");
   }
 
-  // Verify feedback ownership through project
   const feedback = await prisma.feedback.findFirst({
     where: { id: feedbackId },
     include: { project: true },
@@ -142,47 +140,6 @@ export async function deleteFeedback(feedbackId: string) {
 
   revalidatePath(`/projects/${feedback.projectId}`);
   return { success: true };
-}
-
-export async function analyzeSentiment(feedbackId: string) {
-  const session = await getSession();
-  if (!session?.user?.id) {
-    throw new Error("Unauthorized");
-  }
-
-  // Verify feedback ownership through project
-  const feedback = await prisma.feedback.findFirst({
-    where: { id: feedbackId },
-    include: { project: true },
-  });
-
-  if (!feedback || feedback.project?.userId !== session.user.id) {
-    throw new Error("Feedback not found");
-  }
-
-  // Call sentiment API
-  const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || ""}/api/sentiment`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text: feedback.content }),
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to analyze sentiment");
-  }
-
-  const result = await response.json();
-
-  const updated = await prisma.feedback.update({
-    where: { id: feedbackId },
-    data: {
-      sentiment: result.sentiment,
-      sentimentScore: result.confidence,
-    },
-  });
-
-  revalidatePath(`/projects/${feedback.projectId}`);
-  return updated;
 }
 
 export async function getDashboardStats() {

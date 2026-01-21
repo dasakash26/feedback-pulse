@@ -325,7 +325,6 @@
   function createWidget() {
     injectStyles();
 
-    // Icons
     const ICONS = {
       message: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>',
       bug: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="14" x="8" y="2" rx="4"/><path d="m19 7-3 2"/><path d="m5 7 3 2"/><path d="m19 19-3-2"/><path d="m5 19 3-2"/><path d="M20 13h-4"/><path d="M4 13h4"/><path d="m10 4 1 2"/></svg>',
@@ -438,7 +437,7 @@
     const form = document.getElementById('fp-form');
     form.onsubmit = async (e) => {
       e.preventDefault();
-      
+
       const content = document.getElementById('fp-content').value.trim();
       const email = document.getElementById('fp-email').value.trim();
       const errorEl = document.getElementById('fp-error');
@@ -479,13 +478,14 @@
         document.getElementById('fp-success-view').style.display = 'block';
 
         setTimeout(() => {
-            // Optional: Auto close
+          // Optional: Auto close
         }, 3000);
 
       } catch (err) {
         showError('Something went wrong. Please try again.');
         submitBtn.disabled = false;
         submitBtn.textContent = originalBtnText;
+        console.error(err);
       }
 
       function showError(msg) {
@@ -511,7 +511,7 @@
       document.getElementById('fp-error').style.display = 'none';
       document.getElementById('fp-submit-btn').disabled = false;
       document.getElementById('fp-submit-btn').textContent = 'Send Feedback';
-      
+
       // Reset state
       const overlay = document.getElementById('fp-overlay');
       overlay.querySelectorAll('.fp-type-btn').forEach((b, i) => b.classList.toggle('fp-active', i === 0));
@@ -532,7 +532,6 @@
     }
   };
 
-  // Auto-init
   const scripts = document.getElementsByTagName('script');
   for (let i = 0; i < scripts.length; i++) {
     const script = scripts[i];
@@ -541,7 +540,7 @@
       config.apiKey = apiKey;
       const src = script.src;
       if (src) config.baseUrl = src.replace(/\/widget\.js(\?.*)?$/, '');
-      
+
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', createWidget);
       } else {
