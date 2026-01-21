@@ -15,7 +15,7 @@
       --fp-input: oklch(0.923 0.003 48.717);
       --fp-primary: oklch(0.67 0.16 58);
       --fp-primary-fg: oklch(0.99 0.02 95);
-      --fp-radius: 0.35rem;
+      --fp-radius: 0rem;
       --fp-ring: oklch(0.709 0.01 56.259);
     }
     @media (prefers-color-scheme: dark) {
@@ -38,7 +38,7 @@
       right: 24px;
       height: 48px;
       padding: 0 20px;
-      border-radius: 9999px;
+      border-radius: 0;
       background: var(--fp-primary);
       color: var(--fp-primary-fg);
       border: none;
@@ -48,7 +48,7 @@
       align-items: center;
       gap: 10px;
       z-index: 999998;
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s;
+      transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.2s;
       font-family: var(--fp-font);
       font-size: 14px;
       font-weight: 600;
@@ -74,7 +74,7 @@
       justify-content: center;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
     }
     @media (min-width: 640px) {
       .fp-modal-overlay {
@@ -91,18 +91,18 @@
       max-width: 400px;
       background: var(--fp-bg);
       color: var(--fp-fg);
-      border-radius: calc(var(--fp-radius) * 2) calc(var(--fp-radius) * 2) 0 0;
+      border-radius: 0;
       padding: 24px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.2);
       transform: translateY(100%);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
       font-family: var(--fp-font);
       position: relative;
       border: 1px solid var(--fp-border);
     }
     @media (min-width: 640px) {
       .fp-modal {
-        border-radius: calc(var(--fp-radius) * 1.5);
+        border-radius: 0;
         transform: scale(0.95) translateY(10px);
         margin: 20px;
       }
@@ -126,7 +126,7 @@
       background: transparent;
       color: var(--fp-muted-fg);
       cursor: pointer;
-      border-radius: 50%;
+      border-radius: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -277,7 +277,7 @@
       margin-bottom: 16px;
       background: rgba(239, 68, 68, 0.1);
       padding: 8px;
-      border-radius: 8px;
+      border-radius: 0;
     }
 
     .fp-success {
@@ -289,7 +289,7 @@
       height: 64px;
       background: #dcfce7;
       color: #16a34a;
-      border-radius: 50%;
+      border-radius: 0;
       display: flex;
       align-items: center;
       justify-content: center;

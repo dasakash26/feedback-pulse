@@ -1,10 +1,8 @@
 "use client"
-
 import * as React from "react"
 import { LayoutDashboard, FolderOpen } from "lucide-react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
-import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { NavUser } from "@/components/dashboard/nav-user"
 import {
   Sidebar,
@@ -19,6 +17,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { Logo } from "@/components/logo"
 
 const navItems = [
   {
@@ -30,16 +29,6 @@ const navItems = [
   },
 ]
 
-function Logo() {
-  return (
-    <Link href="/dashboard" className="flex items-center gap-2 px-4 pt-4 pb-2">
-      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">
-        FP
-      </div>
-      <span className="text-lg font-semibold tracking-tight">Feedback Pulse</span>
-    </Link>
-  )
-}
 
 export function AppSidebar({ user, ...props }: React.ComponentProps<typeof Sidebar> & { user: any }) { // Using any for rough type match, ideally typed
   const pathname = usePathname()
