@@ -1,11 +1,13 @@
 "use server";
 import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 export const getSession = async () => {
   try {
     const session = await auth.api.getSession({
-      headers: new Headers(),
+      headers: await headers(),
     });
+
     return session;
   } catch (error) {
     console.error("Get session error:", error);

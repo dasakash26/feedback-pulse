@@ -35,14 +35,24 @@ model Project {
   feedbacks Feedback[]
 }
 
+enum FeedbackType {
+  BUG
+  FEATURE
+  OTHER
+}
+
 model Feedback {
-  id             String   @id @default(cuid())
+  id             String       @id @default(cuid())
   content        String
   rating         Int
+  feedbackType   FeedbackType @default(OTHER)
   sentimentScore Float?
+  sentiment      String?      // positive, neutral, negative
+  labels         String[]     @default([])
+  email          String?
   userAgent      String?
   projectId      String
-  createdAt      DateTime @default(now())
+  createdAt      DateTime     @default(now())
 
   project Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
 

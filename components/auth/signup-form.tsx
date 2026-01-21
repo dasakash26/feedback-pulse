@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import GoogleOAuthButton from "./google-oauth-btn";
 
 export function SignUpForm({
@@ -120,7 +121,7 @@ export function SignUpForm({
                   {loading ? "Creating account..." : "Sign up"}
                 </Button>
                 <FieldDescription className="text-center">
-                  Already have an account? <a href="/signin">Sign in</a>
+                  Already have an account? <Link href="/signin">Sign in</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>
@@ -128,8 +129,8 @@ export function SignUpForm({
         </CardContent>
       </Card>
       <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
+        By clicking continue, you agree to our <Link href="#">Terms of Service</Link>{" "}
+        and <Link href="#">Privacy Policy</Link>.
       </FieldDescription>
     </div>
   );
