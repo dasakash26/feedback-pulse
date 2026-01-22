@@ -18,6 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Feedback Pulse",
   description: "Collect and manage user feedback with ease",
+  icons:"icon.svg"
 };
 
 export default function RootLayout({
