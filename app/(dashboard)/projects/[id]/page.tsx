@@ -21,6 +21,7 @@ import { getFeedbackByProject } from "@/app/actions/feedback";
 import { FeedbackList } from "@/components/feedback/feedback-list";
 import { Bug, Lightbulb, MessageSquare } from "lucide-react";
 import { CopyApiKeyButton, EmbedCodeButton } from "@/components/projects/copy-buttons";
+import { CsvExportButton } from "@/components/projects/csv-export-button";
 
 interface ProjectPageProps {
   params: Promise<{ id: string }>;
@@ -161,7 +162,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         <div className="border bg-card">
           <div className="p-6">
-            <h2 className="text-lg font-semibold mb-4">Feedback</h2>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-lg font-semibold">Feedback</h2>
+              <CsvExportButton
+                data={JSON.parse(JSON.stringify(feedbacks))}
+                filename={`${project.name}-feedback.csv`}
+              />
+
+            </div>
             <Suspense fallback={<ProjectDetailSkeleton />}>
               <FeedbackList
                 projectId={id}
@@ -171,7 +179,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </Suspense>
           </div>
         </div>
-      </div>
+      </div >
     </>
   );
 }

@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Bug, Lightbulb, HelpCircle, Star, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Separator } from "../ui/separator";
 
 const typeConfig = {
   BUG: {
@@ -69,15 +70,16 @@ export async function RecentFeedback() {
   return (
     <div className="border bg-card">
       <div className="flex items-center justify-between p-6 pb-4">
-        <h3 className="text-lg font-semibold">Recent Feedback</h3>
-        <Link 
-          href="/projects" 
+        <h3 className="text-xl font-bold">Recent Feedback</h3>
+        <Link
+          href="/projects"
           className="text-sm text-primary hover:underline flex items-center gap-1"
         >
           View all
           <ArrowRight className="h-3 w-3" />
         </Link>
       </div>
+      <Separator />
       <div className="divide-y">
         {feedbacks.map((feedback) => {
           const typeInfo = typeConfig[feedback.feedbackType];
