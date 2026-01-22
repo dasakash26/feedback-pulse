@@ -120,7 +120,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
           <div className="flex items-center gap-2">
             <CopyApiKeyButton apiKey={project.apiKey} />
-            <EmbedCodeButton apiKey={project.apiKey} baseUrl={process.env.NEXT_PUBLIC_APP_URL || ""} />
+            <EmbedCodeButton apiKey={project.apiKey} baseUrl={process.env.NEXT_PUBLIC_URL || ""} />
           </div>
         </div>
 
