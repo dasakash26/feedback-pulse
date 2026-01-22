@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
-import Sentiment from "sentiment";
+import { SentimentIntensityAnalyzer } from "vader-sentiment";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -54,15 +54,14 @@ export async function POST(request: NextRequest) {
     const validTypes = ["BUG", "FEATURE", "OTHER"];
     const type = validTypes.includes(feedbackType) ? feedbackType : "OTHER";
 
-    const sentimentAnalyzer = new Sentiment();
-    const result = sentimentAnalyzer.analyze(content.trim());
+    const result = SentimentIntensityAnalyzer.polarity_scores(content.trim());
     console.log("Sentiment analysis result:", result);
 
     let sentiment = "neutral";
-    if (result.comparative > 0.2) sentiment = "positive";
-    if (result.score < -0.2) sentiment = "negative";
+    if (result.compound >= 0.1) sentiment = "positive";
+    if (result.compound <= -0.1) sentiment = "negative";
 
-    const sentimentScore = Math.min(Math.abs(result.comparative), 1);
+    const sentimentScore = Math.abs(result.compound);
 
     const feedback = await prisma.feedback.create({
       data: {
