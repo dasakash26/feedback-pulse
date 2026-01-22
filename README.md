@@ -164,26 +164,9 @@ Open http://localhost:3000
 
 ---
 
-## Security notes
-
-- API keys are scoped to projects — treat them like secrets and rotate if compromised.
-- Do not store secrets in client-side code. The widget only needs the project API key; sensitive server operations should stay server-side.
-
----
-
 ## Contributing
 
 Contributions are welcome. Open issues or pull requests with focused changes.
 
 ---
 
-## Deployment
-
-Deploy with Vercel or any compatible platform. Ensure required environment variables are set in the deployment environment.
-
----
-
-Next steps (optional):
-
-- Add `API.md` with detailed endpoint examples and response schemas.
-- Add a committed `.env.example` (no secret values).
