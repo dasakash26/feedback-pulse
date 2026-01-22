@@ -56,17 +56,12 @@ export async function POST(request: NextRequest) {
 
     const sentimentAnalyzer = new Sentiment();
     const result = sentimentAnalyzer.analyze(content.trim());
-
-    // Convert score to our format
-    // result.score is typically between -5 and 5
-    // result.comparative is score / number of words
+    console.log("Sentiment analysis result:", result);
 
     let sentiment = "neutral";
-    if (result.score > 1) sentiment = "positive";
-    if (result.score < -1) sentiment = "negative";
+    if (result.comparative > 0.2) sentiment = "positive";
+    if (result.score < -0.2) sentiment = "negative";
 
-    // Normalize confidence score to 0-1 range for compatibility
-    // Using comparative score absolute value, capped at 1
     const sentimentScore = Math.min(Math.abs(result.comparative), 1);
 
     const feedback = await prisma.feedback.create({

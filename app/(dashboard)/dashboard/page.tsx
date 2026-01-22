@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { ModeToggle } from "@/components/ui/theme-toggle";
 import { StatsCard } from "@/components/dashboard/stats-card";
 import { RecentFeedback } from "@/components/dashboard/recent-feedback";
 import {
@@ -103,7 +103,7 @@ export default function DashboardPage() {
           </BreadcrumbList>
         </Breadcrumb>
         <div className="ml-auto px-4">
-          <ThemeToggle />
+          <ModeToggle />
         </div>
       </header>
       <div className="flex flex-1 flex-col gap-6 p-6">

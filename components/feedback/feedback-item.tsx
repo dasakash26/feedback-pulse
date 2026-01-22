@@ -33,7 +33,7 @@ interface FeedbackItemProps {
     content: string;
     rating: number;
     feedbackType: "BUG" | "FEATURE" | "OTHER";
-    sentiment: string | null;
+    sentiment: "positive" | "neutral" | "negative" | null;
     sentimentScore: number | null;
     labels: string[];
     email: string | null;

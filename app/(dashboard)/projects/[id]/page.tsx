@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { ModeToggle } from "@/components/ui/theme-toggle";
 
 import {
   Breadcrumb,
@@ -102,7 +102,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </BreadcrumbList>
         </Breadcrumb>
         <div className="ml-auto px-4">
-          <ThemeToggle />
+          <ModeToggle />
         </div>
       </header>
       <div className="flex flex-1 flex-col gap-6 p-6">

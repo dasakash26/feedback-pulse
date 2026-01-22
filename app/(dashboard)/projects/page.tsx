@@ -1,6 +1,5 @@
 import { Suspense } from "react";
-import { AppSidebar } from "@/components/dashboard/app-sidebar";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { ModeToggle } from "@/components/ui/theme-toggle";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,8 +10,6 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import {
-  SidebarInset,
-  SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -86,7 +83,7 @@ export default function ProjectsPage() {
           </BreadcrumbList>
         </Breadcrumb>
         <div className="ml-auto px-4">
-          <ThemeToggle />
+          <ModeToggle />
         </div>
       </header>
       <div className="flex flex-1 flex-col gap-6 p-6">
